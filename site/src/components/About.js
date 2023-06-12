@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import React from "react";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
+import { fadeIn } from "../variants";
 import TestimonialSlider from "./TestimonialSlide";
 
 const About = () => {
@@ -10,7 +12,13 @@ const About = () => {
   return (
     <section className="section" id="about" ref={ref}>
       <div className="container mx-auto">
-        <div className="justify-center text-center  mb-12 lg:mb-0">
+        <motion.div
+          variants={fadeIn("top", 0.5)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: false, amount: 0.7 }}
+          className="justify-center text-center  mb-12 lg:mb-0"
+        >
           <h2 className="text-[35px] lg:text-[50px] leading-none mb-6">
             Out Happy Client
           </h2>
@@ -21,10 +29,10 @@ const About = () => {
               K+
             </span>
           </h4>
-          <button className="btn btn-sm">
-            <Link to="/client">View all Client</Link>
-          </button>
-        </div>
+          <Link to="/portfolio" className="text-gradient">
+            See All >>
+          </Link>
+        </motion.div>
 
         <TestimonialSlider />
       </div>

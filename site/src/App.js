@@ -38,7 +38,7 @@ const App = () => {
           <Route path="clientinfo" element={<EditClientInfo />} />
           <Route path="forgetpass" element={<ForgetPassword />} />
           <Route path="portfolio" element={<PortfolioPage />} />
-          <Route path="categorysite" element={<CategoryWebPage />} />
+          <Route path="post/:id" element={<CategoryWebPage />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Routes>

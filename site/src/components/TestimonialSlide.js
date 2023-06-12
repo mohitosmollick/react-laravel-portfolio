@@ -1,24 +1,21 @@
+import moment from "moment";
 import React from "react";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-import "../swiper.css";
 import useFetchPost from "../customhook/useFetchData";
+import "../swiper.css";
 
 const TestimonialSlider = () => {
   const { data: clients } = useFetchPost(`clients`);
   return (
     <Swiper
-      pagination={{
-        clickable: true,
-      }}
       autoplay={{
         delay: 2000,
         disableOnInteraction: false,
       }}
-      modules={[Autoplay, Pagination]}
+      modules={[Autoplay]}
       className="mySwiper"
     >
       {clients != null &&
@@ -27,18 +24,18 @@ const TestimonialSlider = () => {
             <SwiperSlide key={index}>
               <div className="flex flex-col lg:flex-row mt-8 gap-12 lg:gap-32">
                 <div className="w-48 h-48 lg:w-[328px] lg:h-[328px]">
-                  <img className="rounded-2xl" src="" alt="" />
+                  <img className="rounded-2xl" src={item.photo} alt="" />
                 </div>
                 <div className="flex flex-col max-w-3xl">
-                  <h5 className="font-body text-xl mb-8 italic font-normal">
+                  <h5 className="font-body text-3xl mb-6  font-normal">
                     {item.name}
                   </h5>
                   <div>
                     <div>
-                      <span className="text-gray-400 text-sm">
-                        {item.created_at}
+                      <span className="text-gray-400 text-xl">
+                        {moment(item.created_at).startOf("hour").fromNow()}
                       </span>
-                      <span className="text-emerald-400">
+                      <span className="text-emerald-400 text-xl">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-6 w-6"
@@ -56,11 +53,8 @@ const TestimonialSlider = () => {
                       </span>
                     </div>
 
-                    <p text-lg text-accent>
-                      comment
-                    </p>
                     <p></p>
-                    <div className="flex items-center justify-content-around">
+                    <div className="flex items-center text-xl  mb-6 justify-content-around">
                       <div class="flex items-center">
                         <svg
                           aria-hidden="true"
@@ -117,6 +111,9 @@ const TestimonialSlider = () => {
                         </p>
                       </div>
                     </div>
+                    <p className="text-2xl ">
+                      This is very good service and good support. Thanks
+                    </p>
                   </div>
                 </div>
               </div>

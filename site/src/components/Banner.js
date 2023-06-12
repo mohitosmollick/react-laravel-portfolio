@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { FaDribbble, FaGithub, FaYoutube } from "react-icons/fa";
+import { BsFacebook } from "react-icons/bs";
+import { FaGithub, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import Image from "../assets/avatar.svg";
@@ -79,14 +80,14 @@ const Banner = () => {
               viewport={{ once: false, amount: 0.7 }}
               className="flex text-[20px]  gap-x-8 max-w-max mx-auto lg:mx-0 "
             >
-              <Link to="">
+              <Link target="_blank" to="https://rb.gy/qblke">
                 <FaYoutube />
               </Link>
-              <Link to="">
+              <Link target="_blank" to="https://rb.gy/nit4f">
                 <FaGithub />
               </Link>
-              <Link to="">
-                <FaDribbble />
+              <Link target="_blank" to="https://rb.gy/my50i">
+                <BsFacebook />
               </Link>
             </motion.div>
           </div>

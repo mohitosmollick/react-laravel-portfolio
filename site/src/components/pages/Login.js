@@ -27,37 +27,29 @@ const Login = () => {
       return setError("password is not null");
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      await axios
-        .post("http://127.0.0.1:8000/api/client_login", {
-          email,
-          password,
-        })
-        .then(({ data }) => {
-          Swal.fire({
-            text: data.message + data.user,
-            title: "Error!",
-            icon: "success",
-            confirmButtonText: "Cool",
-          });
-
-
+    setError("");
+    setLoading(true);
+    await axios
+      .post("http://127.0.0.1:8000/api/client_login", {
+        email,
+        password,
+      })
+      .then(({ data }) => {
+        Swal.fire({
+          text: data.message,
+          title: "Error!",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+        if (data.Authorization) {
           sessionStorage.setItem("id", data.id);
           sessionStorage.setItem("name", data.name);
           sessionStorage.setItem("email", data.email);
-          sessionStorage.setItem("photo", data.photo);
           navigate("/");
-          window.location.reload(true);
+        }
 
-          // sessionStorage.setItem("logout", data.logout);
-        });
-    } catch (err) {
-      Swal.fire("Failed to create an account!", err.message, "question");
-      setLoading(false);
-      setError("Failed to create an account!");
-    }
+        window.location.reload(true);
+      });
   }
 
   return (

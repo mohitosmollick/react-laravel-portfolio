@@ -14,6 +14,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
+  const [redirect, setRedirect] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,29 +25,27 @@ const Register = () => {
       return setError("password is not match");
     }
 
-    try {
-      setError("");
-      setLoading(true);
-      await axios
-        .post("http://127.0.0.1:8000/api/client_register", {
-          name,
-          email,
-          password,
-        })
-        .then(({ data }) => {
-          Swal.fire({
-            text: data.message,
-            title: "Success",
-            icon: "success",
-            confirmButtonText: "Cool",
-          });
-          navigate("/login");
+    setError("");
+    setLoading(true);
+    await axios
+      .post("http://127.0.0.1:8000/api/client_register", {
+        name,
+        email,
+        password,
+      })
+      .then(({ data }) => {
+        Swal.fire({
+          text: data.message,
+          title: "Success",
+          icon: "success",
+          confirmButtonText: "Cool",
         });
-    } catch (err) {
-      Swal.fire("Failed to create an account!", err.message, "question");
-      setLoading(false);
-      setError("Failed to create an account!");
-    }
+        setRedirect(true);
+      });
+  }
+
+  if (redirect) {
+    navigate("/login");
   }
 
   return (
